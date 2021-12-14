@@ -34,9 +34,8 @@ function createGalleryMarkup() {
     })
     .join('');
 }
-
 refs.gallery.addEventListener('click', onOpenModal);
-refs.gallery.addEventListener('keydown',onEscKeyPress)
+
 function onOpenModal(event) { 
  event.preventDefault() 
   if (event.target.nodeName !== 'IMG') {
@@ -44,16 +43,15 @@ function onOpenModal(event) {
   }
   refs.modal.src = event.target.dataset.source;
   instance.show()
+  window.addEventListener('keydown',onEscKeyPress)
 }
-
 function onEscKeyPress(event) {
-  const ESC_KEY_CODE = 'Escape';
-  const isEscKey = event.code === ESC_KEY_CODE;
-
+   event.preventDefault() 
+  const isEscKey = event.keyCode === 27;
+  console.log(event);
   if (isEscKey) {
     instance.close();
-    document.removeEventListener('keydown', onEscKeyPress);
+    window.removeEventListener('keydown', onEscKeyPress);
   refs.modal.src = ''
   }
 }
- 
